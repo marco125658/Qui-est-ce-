@@ -133,7 +133,6 @@
             const isLast = index === delays.length - 1;
             const character = isLast ? winner : pickRandomForSpin(universeData.characters);
             updateReelDisplay(character, !isLast);
-            playTick();
             scheduleStep(index + 1, delays, winner);
         }, delays[index]);
     }
@@ -165,19 +164,33 @@
         lastCharacterId = winner.id;
         isSpinning = false;
 
-        stopAudio();
+        playResultSound();
     }
 
+    /* Déclenche une lecture (puis pause immédiate) pendant le clic de
+       l'utilisateur, pour autoriser la lecture programmatique du son
+       plus tard (contournement des restrictions d'autoplay mobile). */
     function unlockAudio() {
         if (!audioEl) return;
         try {
-            audioEl.currentTime = 0;
+            const playPromise = audioEl.play();
+            if (playPromise && typeof playPromise.then === "function") {
+                playPromise.then(function () {
+                    audioEl.pause();
+                    audioEl.currentTime = 0;
+                }).catch(function () {
+                    /* lecture bloquée : le jeu continue simplement sans son */
+                });
+            } else {
+                audioEl.pause();
+                audioEl.currentTime = 0;
+            }
         } catch (e) {
-            /* certains navigateurs refusent avant le premier play, sans gravité */
+            /* pas de son disponible : le jeu continue normalement */
         }
     }
 
-    function playTick() {
+    function playResultSound() {
         if (!audioEl) return;
         try {
             audioEl.currentTime = 0;
@@ -189,16 +202,6 @@
             }
         } catch (e) {
             /* pas de son disponible : le jeu continue normalement */
-        }
-    }
-
-    function stopAudio() {
-        if (!audioEl) return;
-        try {
-            audioEl.pause();
-            audioEl.currentTime = 0;
-        } catch (e) {
-            /* rien à faire */
         }
     }
 })();

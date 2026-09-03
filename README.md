@@ -8,19 +8,20 @@ base de données, aucun compte.
 
 ## Où mettre les photos
 
-- `assets/himym/01.jpg` → `assets/himym/24.jpg`
-- `assets/crazy-game/01.jpg` → `assets/crazy-game/24.jpg`
+- `assets/himym/01.png` → `assets/himym/24.png`
+- `assets/crazy-game/01.png` → `assets/crazy-game/24.png`
 
-Un fichier `METTRE_LES_PHOTOS_ICI.txt` dans chaque dossier rappelle le
-format attendu. Tant que les vraies photos ne sont pas là, le jeu affiche
-un simple bloc avec un `?` à la place — rien ne casse.
+Tant qu'une photo n'est pas là (ou porte un mauvais nom), le jeu affiche
+un simple bloc avec un `?` à la place — rien ne casse. Si tu utilises des
+photos au format `.jpg` plutôt que `.png`, change l'extension dans
+`js/data.js` (voir ci-dessous) en plus du nom de fichier.
 
 ## Où modifier les noms des personnages
 
 Tout se passe dans [`js/data.js`](js/data.js). Chaque personnage a cette forme :
 
 ```javascript
-{ id: 5, name: "Personnage 05", image: "assets/himym/05.jpg" }
+{ id: 5, name: "Personnage 05", image: "assets/himym/05.png" }
 ```
 
 Remplace uniquement le texte entre guillemets après `name:`. Pas besoin de
@@ -28,8 +29,17 @@ toucher à autre chose.
 
 ## Où mettre le son de la roulette
 
-`assets/sounds/roulette.mp3` (un petit bruit mécanique type « tac »).
-Sans ce fichier, le jeu fonctionne normalement, juste sans son.
+`assets/sounds/roulette.wav`. Sans ce fichier, le jeu fonctionne
+normalement, juste sans son.
+
+Le son actuellement en place est un effet de type « victoire » (assez
+long, ~4 s) : il est donc joué **une fois, au moment où le personnage
+est révélé**, plutôt que répété à chaque image pendant le défilement
+(un son aussi long ferait un effet de bégaiement s'il était redémarré
+20 fois en 2 secondes). Si tu obtiens un jour un vrai bruit de « tac »
+mécanique court, dis-le à Claude Code : il faudra rebasculer sur une
+lecture répétée pendant le défilement plutôt qu'une lecture unique à
+la fin.
 
 ## Réglages rapides
 
@@ -93,7 +103,7 @@ qui-est-ce/
 │   ├── game.js           sélection de l'univers
 │   └── roulette.js       logique de la roulette
 └── assets/
-    ├── himym/            photos HIMYM (01.jpg à 24.jpg)
-    ├── crazy-game/       photos Crazy Game (01.jpg à 24.jpg)
-    └── sounds/           roulette.mp3
+    ├── himym/            photos HIMYM (01.png à 24.png)
+    ├── crazy-game/       photos Crazy Game (01.png à 24.png)
+    └── sounds/           roulette.wav
 ```
