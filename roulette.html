@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Roulette — Qui est ce ?</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="page page--roulette">
+        <h1 id="universe-name" class="page-title">&nbsp;</h1>
+
+        <main class="roulette-area">
+            <div class="reel">
+                <div id="photo-wrap" class="reel__photo-wrap">
+                    <img id="reel-photo" class="reel__photo" src="" alt="">
+                </div>
+                <p id="reel-name" class="reel__name">?</p>
+            </div>
+
+            <p id="result-banner" class="result-banner" hidden>C'EST LUI !</p>
+
+            <button id="btn-launch" type="button" class="btn btn--primary btn--large">
+                LANCER LA ROULETTE
+            </button>
+
+            <div id="result-actions" class="result-actions" hidden>
+                <button id="btn-replay" type="button" class="btn btn--primary btn--large">RELANCER</button>
+                <a href="game.html" class="btn btn--ghost btn--large">MENU</a>
+            </div>
+        </main>
+
+        <audio id="sfx-roulette" src="assets/sounds/roulette.mp3" preload="auto"></audio>
+    </div>
+
+    <script src="js/data.js" defer></script>
+    <script src="js/roulette.js" defer></script>
+</body>
+</html>

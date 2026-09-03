@@ -1,0 +1,10 @@
+Place ici le fichier son de la roulette, nommé exactement :
+roulette.mp3
+
+Il doit s'agir d'un petit bruit mécanique type "tac" (déclic de roulette).
+Le site le rejoue automatiquement à chaque changement de personnage
+pendant l'animation.
+
+Si ce fichier est absent, le jeu fonctionne quand même, simplement sans son.
+
+Tu peux supprimer ce fichier texte une fois roulette.mp3 ajouté.
