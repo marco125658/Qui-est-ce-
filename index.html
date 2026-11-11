@@ -16,6 +16,19 @@
         </main>
     </div>
 
+    <!-- Pop-up d'anniversaire temporaire (voir js/anniversaire.js) -->
+    <div id="birthday-popup" class="popup" role="dialog" aria-modal="true" aria-labelledby="birthday-title">
+        <div class="popup__box">
+            <p id="birthday-title" class="birthday-banner">BON ANNIVERSAIRE<br>GROSSE FOLLE</p>
+            <img class="birthday-photo" src="assets/anniversaire/photo.jpg" alt="Affiche Bodyguard : Ne la quitte jamais des yeux">
+            <button id="btn-music" type="button" class="btn btn--ghost" hidden>&#9835; LANCER LA MUSIQUE</button>
+        </div>
+    </div>
+
+    <audio id="birthday-audio" src="assets/anniversaire/musique.mp3" preload="auto"></audio>
+
     <script src="js/home.js" defer></script>
+    <script src="js/confetti.js" defer></script>
+    <script src="js/anniversaire.js" defer></script>
 </body>
 </html>
