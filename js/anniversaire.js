@@ -8,7 +8,7 @@
  */
 
 (function () {
-    const MUSIC_START = 8;
+    const MUSIC_START = 10;
     const PHOTO_INTERVAL = 2750;
     const PHOTOS = [
         "assets/anniversaire/photo.jpg",
