@@ -468,3 +468,32 @@ img {
     z-index: 101;
     pointer-events: none;
 }
+
+/* Notes de musique qui se promènent dans le fond du pop-up */
+.popup__box {
+    position: relative;
+    z-index: 1;
+}
+
+.music-note {
+    position: fixed;
+    bottom: -60px;
+    z-index: 0;
+    font-weight: 700;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    animation: note-float linear infinite;
+}
+
+@keyframes note-float {
+    0%   { transform: translate(0, 0) rotate(-15deg); opacity: 0; }
+    10%  { opacity: 0.9; }
+    50%  { transform: translate(40px, -55vh) rotate(15deg); }
+    90%  { opacity: 0.9; }
+    100% { transform: translate(-20px, -115vh) rotate(-15deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .music-note { display: none; }
+}

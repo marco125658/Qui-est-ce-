@@ -10,6 +10,7 @@
 (function () {
     const MUSIC_START = 10;
     const PHOTO_INTERVAL = 2750;
+    const NOTE_COUNT = 14;
     const PHOTOS = [
         "assets/anniversaire/photo.jpg",
         "assets/anniversaire/photo2.png",
@@ -45,6 +46,23 @@
         });
     }
 
+    function createNotes() {
+        const symbols = ["♪", "♫", "♩", "♬"];
+        const colors = ["#FF1717", "#38B6FF", "#FFFFFF", "#FFD400"];
+        for (let i = 0; i < NOTE_COUNT; i++) {
+            const note = document.createElement("span");
+            note.className = "music-note";
+            note.setAttribute("aria-hidden", "true");
+            note.textContent = symbols[i % symbols.length];
+            note.style.left = Math.round(Math.random() * 95) + "%";
+            note.style.fontSize = (24 + Math.random() * 36) + "px";
+            note.style.color = colors[i % colors.length];
+            note.style.animationDuration = (6 + Math.random() * 6) + "s";
+            note.style.animationDelay = (-Math.random() * 12) + "s";
+            popupEl.appendChild(note);
+        }
+    }
+
     function closePopup() {
         clearInterval(photoTimer);
         Confetti.stop();
@@ -64,6 +82,7 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         startPhotoCycle();
+        createNotes();
         Confetti.start();
         audioEl.addEventListener("loadedmetadata", seekToStart);
         audioEl.addEventListener("ended", closePopup);
