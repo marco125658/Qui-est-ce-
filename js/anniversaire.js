@@ -8,7 +8,7 @@
  */
 
 (function () {
-    const MUSIC_START = 10;
+    const MUSIC_START = 0; /* le fichier musique-depart10s.mp3 est déjà coupé à 10 s */
     const PHOTO_INTERVAL = 2750;
     const NOTE_COUNT = 14;
     const PHOTOS = [
@@ -27,7 +27,7 @@
     let hasSeeked = false;
 
     function seekToStart() {
-        if (hasSeeked || audioEl.readyState < 1) return;
+        if (!MUSIC_START || hasSeeked || audioEl.readyState < 1) return;
         audioEl.currentTime = MUSIC_START;
         hasSeeked = true;
     }
