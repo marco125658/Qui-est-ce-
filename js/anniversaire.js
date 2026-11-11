@@ -3,7 +3,7 @@
  * Le pop-up ne se ferme qu'à la fin de la musique (une seule lecture).
  * Réglage : MUSIC_START = seconde de départ de la musique.
  * La musique se lance toute seule ; si le navigateur la bloque (smartphone),
- * un bouton apparaît et le premier toucher dans la page la démarre.
+ * le premier toucher dans la page la démarre (aucun bouton affiché).
  * Si le fichier audio est introuvable, le pop-up se ferme pour ne pas bloquer le jeu.
  */
 
@@ -24,7 +24,6 @@
 
     const popupEl = document.getElementById("birthday-popup");
     const audioEl = document.getElementById("birthday-audio");
-    const musicBtn = document.getElementById("btn-music");
     let hasSeeked = false;
 
     function seekToStart() {
@@ -39,10 +38,9 @@
         if (!playPromise || typeof playPromise.then !== "function") return;
 
         playPromise.then(function () {
-            musicBtn.hidden = true;
             document.removeEventListener("pointerdown", startMusic);
         }).catch(function () {
-            musicBtn.hidden = false;
+            /* autoplay bloqué : le premier toucher dans la page lancera la musique */
         });
     }
 
@@ -87,7 +85,6 @@
         audioEl.addEventListener("loadedmetadata", seekToStart);
         audioEl.addEventListener("ended", closePopup);
         audioEl.addEventListener("error", closePopup);
-        musicBtn.addEventListener("click", startMusic);
         document.addEventListener("pointerdown", startMusic);
         startMusic();
     });
