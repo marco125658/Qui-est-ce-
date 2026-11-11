@@ -32,13 +32,21 @@
         hasSeeked = true;
     }
 
+    const TAP_EVENTS = ["click", "touchend", "keydown"];
+
+    function removeTapListeners() {
+        TAP_EVENTS.forEach(function (name) {
+            document.removeEventListener(name, startMusic);
+        });
+    }
+
     function startMusic() {
         seekToStart();
         const playPromise = audioEl.play();
         if (!playPromise || typeof playPromise.then !== "function") return;
 
         playPromise.then(function () {
-            document.removeEventListener("pointerdown", startMusic);
+            removeTapListeners();
         }).catch(function () {
             /* autoplay bloqué : le premier toucher dans la page lancera la musique */
         });
@@ -64,7 +72,7 @@
     function closePopup() {
         clearInterval(photoTimer);
         Confetti.stop();
-        document.removeEventListener("pointerdown", startMusic);
+        removeTapListeners();
         popupEl.hidden = true;
     }
 
@@ -85,7 +93,9 @@
         audioEl.addEventListener("loadedmetadata", seekToStart);
         audioEl.addEventListener("ended", closePopup);
         audioEl.addEventListener("error", closePopup);
-        document.addEventListener("pointerdown", startMusic);
+        TAP_EVENTS.forEach(function (name) {
+            document.addEventListener(name, startMusic);
+        });
         startMusic();
     });
 })();
