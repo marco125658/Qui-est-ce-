@@ -1,5 +1,7 @@
 /**
- * anniversaire.js — pop-up d'anniversaire sur l'accueil.
+ * anniversaire.js — pop-up d'anniversaire (pages index.html et game.html).
+ * INTERRUPTEUR : ENABLED = false → pop-up et musique désactivés (tout le reste est gardé).
+ *              ENABLED = true  → pop-up et musique réactivés.
  * Le pop-up ne se ferme qu'à la fin de la musique (une seule lecture).
  * Réglage : MUSIC_START = seconde de départ de la musique.
  * La musique se lance toute seule ; si le navigateur la bloque (smartphone),
@@ -8,6 +10,9 @@
  */
 
 (function () {
+    const ENABLED = false;
+    if (!ENABLED) return;
+
     const MUSIC_START = 0; /* le fichier musique-depart10s.mp3 est déjà coupé à 10 s */
     const PHOTO_INTERVAL = 2750;
     const NOTE_COUNT = 14;
@@ -87,6 +92,8 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
+        popupEl.hidden = false;
+        audioEl.preload = "auto";
         startPhotoCycle();
         createNotes();
         Confetti.start();
